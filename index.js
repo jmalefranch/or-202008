@@ -56,35 +56,77 @@ for (var i = 0; i < vehiculos.length; i++) {
       ""
   );
 }
+
 console.log(
   "==================================================================="
 );
+
+function ParsearPrecio() {
+  precioentero = [];
+  for (i = 0; i < vehiculos.length; i++) {
+    precioentero[i] = vehiculos[i];
+    precioentero[i].Precio = parseInt(precioentero[i].Precio);
+  }
+}
+
+ParsearPrecio();
+
+function ElMasCaro() {
+  precioentero.sort(function (prev, next) {
+    return next.Precio - prev.Precio;
+  });
+}
+
+function ElMasBarato() {
+  precioentero.sort(function (prev, next) {
+    return prev.Precio - next.Precio;
+  });
+}
+
+ElMasCaro();
 console.log(
-  "Vehículo más caro:" + "" + vehiculos[2].Marca + "" + vehiculos[2].Modelo
+  "Vehículo más caro:" + "" + precioentero[0].Marca + precioentero[0].Modelo
 );
+
+ElMasBarato();
+
 console.log(
-  "Vehículo más barato:" + "" + vehiculos[1].Marca + "" + vehiculos[1].Modelo
+  "Vehículo más barato:" +
+    "" +
+    precioentero[0].Marca +
+    "" +
+    precioentero[0].Modelo
 );
+
+var ModeloY = [];
+
+function BuscaModeloConLetraY() {
+  for (i = 0; i < vehiculos.length; i++) {
+    if (vehiculos[i].Modelo == "YBR") {
+      ModeloY = vehiculos[i];
+    }
+  }
+}
+
+BuscaModeloConLetraY();
 console.log(
   "Vehículo que contiene en el modelo la letra ‘Y’:" +
     "" +
-    vehiculos[3].Marca +
-    "" +
-    vehiculos[3].Modelo +
+    ModeloY.Modelo +
     "" +
     "$" +
-    "" +
-    vehiculos[3].Precio
+    ModeloY.Precio
 );
+
 console.log(
   "==================================================================="
 );
 console.log("Vehículos ordenados por precio, de mayor a menor:");
-var comparativa = 0;
-for (var i = 0; i < vehiculos.length; i++) {
-  precioentero = parseInt(vehiculos[i].Precio);
 
-  if (precioentero > comparativa) {
-    console.log(vehiculos[i].Marca + vehiculos[i].Modelo);
+function MostrarOrdenados() {
+  precioentero.reverse();
+  for (i = 0; i < precioentero.length; i++) {
+    console.log(precioentero[i].Marca + precioentero[i].Modelo);
   }
 }
+MostrarOrdenados();
